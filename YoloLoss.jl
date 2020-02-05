@@ -43,7 +43,7 @@ function extractgroundtruth(y_true)
 end
 
 function calc_loss_xywh(true_box_conf,COORD_SCALE,true_box_xy, pred_box_xy,true_box_wh,pred_box_wh)
-    coord_mask = true_box_conf .* COORD_SCALE #13,13,5,1,64lük array. 0lar ve 1*COORD_SCALEden oluşuyor
+    coord_mask = true_box_conf .* COORD_SCALE #13,13,5,1,64 array.
     nb_coord_box = sum(coord_mask .> 0)
     loss_xy = sum(square.(true_box_xy-pred_box_xy) .* coord_mask) / (nb_coord_box + 1e-6) / 2.0
     loss_wh = sum(square.(true_box_wh-pred_box_wh) .* coord_mask) / (nb_coord_box + 1e-6) / 2.0

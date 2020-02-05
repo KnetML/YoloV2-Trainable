@@ -175,12 +175,11 @@ end
 function prepbatches(out)
     total = Array{Array{Float32,4},1}()
     btotal = Array{Array{Float32,5},1}()
-    # her seferinde hazırla sonra totale koy onu da catle return et
     for i in 1:length(out)
         onedim = zeros(Float32,13,13,5,25)
         onedimb = zeros(Float32,1,1,1,50,4)
         for k in 3:length(out[i])
-            x = out[i][k][1] / 32   #Sanki 13*13 pixelmiş gibi davran
+            x = out[i][k][1] / 32   
             y = out[i][k][2] / 32
             w = out[i][k][3] / 32
             h = out[i][k][4] / 32
@@ -199,7 +198,7 @@ function prepbatches(out)
     return cat(total...,dims=5),cat(btotal...,dims=6)
 end
 
-#Aynı yere birden fazla atama olabilir
+
 function fillLocation!(arr,x,y,w,h,classNo,cx,cy)
     ious = Array{Float32,1}()
     for i in 1:length(anchors) # Find best iou match and fill only this part of array
